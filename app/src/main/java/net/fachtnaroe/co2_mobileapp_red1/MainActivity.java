@@ -30,6 +30,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     PasswordTextBox passwordBox;
 
     Button goButton;
+    Web backend;
 
     protected void $define() {
 
@@ -42,9 +43,11 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         passwordBox=new PasswordTextBox(VerticalArrangement1);
         goButton = new Button(HorizontalArrangement1);
         goButton.Text("Hello");
+        bkend = new Web(this);
 
         EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
         EventDispatcher.registerEventForDelegation(this, formName, "Click");
+        EventDispatcher.registerEventForDelegation(this, formName, "GotText");
     }
 
     public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
@@ -52,8 +55,13 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
         if (eventName.equals("BackPressed")) {
             // this would be a great place to do something useful
-
+            bkend.url("http://fachtnaroe.net/qndco2?cmd");
+            bkend.get();
             return true;
+        }
+        else if (eventName.equals("GotText")) {
+
+
         }
         else if (eventName.equals("Click")) {
             if (component.equals(goButton)) {
