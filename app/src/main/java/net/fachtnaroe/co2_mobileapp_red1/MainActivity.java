@@ -93,59 +93,6 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         PreviousCO2.BackgroundColor(COLOR_GRAY);
         PreviousCO2.FontTypeface(TYPEFACE_SERIF);
     }
-
-    @Override
-    public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
-        // finally, here is how the events are responded to
-        dbg("dispatchEvent: " + formName + " [" +component.toString() + "] [" + componentName + "] " + eventName);
-        String msg;
-        dbg("C");
-        if (eventName.equals("Click")) {
-            if (component.equals(Guess_Button)) {
-                dbg("A");
-                Integer temp = Integer.parseInt(HowManyGuessesItTook.Text());
-                temp++;
-                HowManyGuessesItTook.Text(temp.toString());
-                if (isNumeric( InsertAnswer.Text())) {
-                    int val = Integer.parseInt(InsertAnswer.Text());
-                    dbg(InsertAnswer.Text() + " " + RandomNumber);
-                    if (val > RandomNumber) {
-                        // too high
-                        msg = "Too high";
-                    } else if (val < RandomNumber) {
-                        // too low
-                        msg = "Too low";
-                    } else { // correct
-                        msg = "Correct";
-                    }
-                    Rules.Text(msg);
-                }
-                else {
-                    // display "That's not a number." on screen
-                    dbg("B");
-                }
-                dbg("D");
-                return true;
-            }
-
-            dbg("E");
-        }
-        return false;
-    }
-    public static void dbg (String debugMsg) {
-        System.err.println( "~~~> " + debugMsg + " <~~~\n");
-    }
-    public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        try {
-            double d = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
 }
 // Here be monsters:
 // put unwanted code here, or experimental code awaiting placement
