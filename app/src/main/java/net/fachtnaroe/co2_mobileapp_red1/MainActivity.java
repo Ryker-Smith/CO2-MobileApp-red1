@@ -23,7 +23,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     TextBox InsertAnswer;
     Label HowManyGuessesItTook;
     Button Guess_Button, Restart;
-    int RandomNumber;
+    int RandomNumber, test;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
