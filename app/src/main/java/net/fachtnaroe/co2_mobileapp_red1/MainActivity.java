@@ -20,11 +20,8 @@ import java.util.Random;
 public class MainActivity extends Form implements HandlesEventDispatching {
     private
     VerticalArrangement Main;
-    Label Title, Instructions, Rules;
-    TextBox InsertAnswer;
-    Label HowManyGuessesItTook;
-    Button Guess_Button, Restart;
-    int RandomNumber;
+    Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading;
+    Button PreviousCO2;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -34,9 +31,9 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         /* Cur seo isteach. Is cuma cén focal atá ann, níl gá leis */
         this.Sizing("Responsive");
 
-        Main= new VerticalArrangement(this);
-        Main.BackgroundColor(COLOR_PINK);
+        Main = new VerticalArrangement(this);
         Main.HeightPercent(100);
+        Main.Image("cowbackground.jpg");
 
         Title= new Label(Main);
         Title.Text("My Guessing Game!");
