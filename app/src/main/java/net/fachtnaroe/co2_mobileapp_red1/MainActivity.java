@@ -35,76 +35,63 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         Main.HeightPercent(100);
         Main.Image("cowbackground.jpg");
 
-        Title= new Label(Main);
-        Title.Text("My Guessing Game!");
-        Title.TextColor(COLOR_RED);
-        Title.TextAlignment(ALIGNMENT_CENTER);
-        Title.HeightPercent(10);
-        Title.WidthPercent(100);
-        Title.FontSize(30);
-        Title.BackgroundColor(COLOR_PINK);
-        Title.FontTypeface(TYPEFACE_SERIF);
+        CO2Monitor = new Label(Main);
+        CO2Monitor.Text("CO2 MONITOR");
+        CO2Monitor.TextColor(COLOR_BLACK);
+        CO2Monitor.TextAlignment(ALIGNMENT_CENTER);
+        CO2Monitor.HeightPercent(8);
+        CO2Monitor.WidthPercent(100);
+        CO2Monitor.FontSize(35);
+        CO2Monitor.FontTypeface(TYPEFACE_SERIF);
+        CO2Monitor.FontBold(true);
 
-        Instructions= new Label(Main);
-        Instructions.Text("Guess a number then press Guess.");
-        Instructions.TextColor(COLOR_BLACK);
-        Instructions.TextAlignment(ALIGNMENT_CENTER);
-        Instructions.HeightPercent(10);
-        Instructions.WidthPercent(100);
-        Instructions.FontSize(25);
-        Instructions.FontTypeface(TYPEFACE_SERIF);
+        CO2 = new Label(Main);
+        CO2.Text("CO2 (parts per million-ppm):");
+        CO2.TextColor(COLOR_BLACK);
+        CO2.TextAlignment(ALIGNMENT_CENTER);
+        CO2.HeightPercent(10);
+        CO2.WidthPercent(100);
+        CO2.FontSize(30);
+        CO2.FontTypeface(TYPEFACE_SERIF);
 
-        Rules= new Label(Main);
-        Rules.Text("Too high/low/correct?");
-        Rules.TextColor(COLOR_BLACK);
-        Rules.TextAlignment(ALIGNMENT_CENTER);
-        Rules.HeightPercent(10);
-        Rules.WidthPercent(100);
-        Rules.FontSize(25);
-        Rules.FontTypeface(TYPEFACE_SERIF);
+        CO2Reading = new Label(Main);
+        CO2Reading.Text("334");
+        CO2Reading.TextColor(COLOR_BLACK);
+        CO2Reading.TextAlignment(ALIGNMENT_CENTER);
+        CO2Reading.HeightPercent(10);
+        CO2Reading.WidthPercent(100);
+        CO2Reading.FontSize(30);
+        CO2Reading.BackgroundColor(COLOR_WHITE);
+        CO2Reading.FontTypeface(TYPEFACE_SERIF);
 
-        InsertAnswer= new TextBox(Main);
-        InsertAnswer.HeightPercent(10);
-        InsertAnswer.WidthPercent(100);
-        InsertAnswer.BackgroundColor(COLOR_WHITE);
-//        InsertAnswer.Text("");
-        InsertAnswer.Hint("Insert answer here:");
-        InsertAnswer.NumbersOnly(true);
-        InsertAnswer.TextColor(COLOR_BLACK);
-        InsertAnswer.FontSize(22);
-        InsertAnswer.TextAlignment(ALIGNMENT_CENTER);
+        Temperature = new Label(Main);
+        Temperature.Text("Temperature (degrees celcius):");
+        Temperature.TextColor(COLOR_BLACK);
+        Temperature.TextAlignment(ALIGNMENT_CENTER);
+        Temperature.HeightPercent(10);
+        Temperature.WidthPercent(100);
+        Temperature.FontSize(30);
+        Temperature.FontTypeface(TYPEFACE_SERIF);
 
-        Guess_Button= new Button(Main);
-        Guess_Button.Text("GUESS!!");
-        Guess_Button.TextColor(COLOR_BLACK);
-        Guess_Button.TextAlignment(ALIGNMENT_CENTER);
-        Guess_Button.HeightPercent(10);
-        Guess_Button.WidthPercent(100);
-        Guess_Button.FontSize(22);
-        Guess_Button.BackgroundColor(COLOR_GRAY);
+        TemperatureReading = new Label(Main);
+        TemperatureReading.HeightPercent(10);
+        TemperatureReading.WidthPercent(100);
+        TemperatureReading.Text("17");
+        TemperatureReading.TextAlignment(ALIGNMENT_CENTER);
+        TemperatureReading.TextColor(COLOR_BLACK);
+        TemperatureReading.FontSize(30);
+        TemperatureReading.BackgroundColor(COLOR_WHITE);
+        TemperatureReading.FontTypeface(TYPEFACE_SERIF);
 
-        HowManyGuessesItTook= new Label(Main);
-        HowManyGuessesItTook.HeightPercent(10);
-        HowManyGuessesItTook.WidthPercent(100);
-        HowManyGuessesItTook.BackgroundColor(COLOR_WHITE);
-        HowManyGuessesItTook.Text("0");
-        HowManyGuessesItTook.TextAlignment(ALIGNMENT_CENTER);
-        HowManyGuessesItTook.TextColor(COLOR_BLACK);
-        HowManyGuessesItTook.FontSize(22);
-
-        Restart= new Button(Main);
-        Restart.Text("Restart?");
-        Restart.TextColor(COLOR_BLACK);
-        Restart.TextAlignment(ALIGNMENT_CENTER);
-        Restart.HeightPercent(10);
-        Restart.WidthPercent(100);
-        Restart.FontSize(22);
-        Restart.BackgroundColor(COLOR_GRAY);
-
-        RandomNumber= new Random().nextInt(100);
-        // now, the events the components can respond to
-        EventDispatcher.registerEventForDelegation(this, formName, "Click");
-        EventDispatcher.registerEventForDelegation(this, formName, "Timer");
+        PreviousCO2 = new Button(Main);
+        PreviousCO2.Text("Previous CO2 Readings");
+        PreviousCO2.TextColor(COLOR_BLACK);
+        PreviousCO2.TextAlignment(ALIGNMENT_CENTER);
+        PreviousCO2.HeightPercent(10);
+        PreviousCO2.WidthPercent(100);
+        PreviousCO2.FontSize(25);
+        PreviousCO2.BackgroundColor(COLOR_GRAY);
+        PreviousCO2.FontTypeface(TYPEFACE_SERIF);
     }
 
     @Override
