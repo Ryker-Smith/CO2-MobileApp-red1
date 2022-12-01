@@ -1,6 +1,5 @@
 package net.fachtnaroe.co2_mobileapp_red1;
 
-import android.graphics.fonts.FontFamily;
 import com.google.appinventor.components.runtime.Button;
 import com.google.appinventor.components.runtime.Clock;
 import com.google.appinventor.components.runtime.Component;
@@ -8,20 +7,23 @@ import com.google.appinventor.components.runtime.EventDispatcher;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
-import com.google.appinventor.components.runtime.Image;
 import com.google.appinventor.components.runtime.Label;
-import com.google.appinventor.components.runtime.Notifier;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
-import com.google.appinventor.components.runtime.VerticalScrollArrangement;
+import com.google.appinventor.components.runtime.Web;
 
-import java.util.Random;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends Form implements HandlesEventDispatching {
     private
     VerticalArrangement Main;
-    Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading;
+    HorizontalArrangement Main_h1;
+    Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading, deviceLabel;
     Button PreviousCO2;
+    TextBox deviceName;
+    Web web_CELCIUS;
+    Clock rolex;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -45,6 +47,12 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CO2Monitor.FontTypeface(TYPEFACE_SERIF);
         CO2Monitor.FontBold(true);
 
+        Main_h1=new HorizontalArrangement(Main);
+        deviceLabel=new Label(Main_h1);
+        deviceLabel.Text("Device:");
+        deviceName=new TextBox(Main_h1);
+        deviceName.Hint("TCFE-CO2-20-AE");
+        deviceName.Text("TCFE-CO2-20-AE");
         CO2 = new Label(Main);
         CO2.Text("CO2 (parts per million-ppm):");
         CO2.TextColor(COLOR_BLACK);
@@ -92,6 +100,69 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         PreviousCO2.FontSize(25);
         PreviousCO2.BackgroundColor(COLOR_GRAY);
         PreviousCO2.FontTypeface(TYPEFACE_SERIF);
+        rolex = new Clock(Main);
+        web_CELCIUS =new Web(Main);
+        rolex.TimerInterval(10000);
+        rolex.TimerEnabled(true);
+
+        EventDispatcher.registerEventForDelegation(this, formName, "Click");
+        EventDispatcher.registerEventForDelegation(this, formName, "Timer");
+        EventDispatcher.registerEventForDelegation(this, formName, "GotText");
+        EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
+        EventDispatcher.registerEventForDelegation(this, formName, "OtherScreenClosed");
+    }
+    public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
+
+        System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
+        if (eventName.equals("BackPressed")) {
+            // this would be a great place to do something useful
+            return true;
+        }
+        else if (eventName.equals("Click")) {
+
+        }
+        else if (eventName.equals("GotText")) {
+            dbg("GotText");
+            if (component.equals(web_CELCIUS)) {
+                String status = params[1].toString();
+                String textOfResponse = (String) params[3];
+                handleWebResponse(status, textOfResponse);
+                return true;
+            }
+        }
+        else if (eventName.equals("Timer")) {
+            if (component.equals(rolex)) {
+                rolex.TimerEnabled(false);
+
+                web_CELCIUS.Url(
+                        "https://fachtnaroe.net/qndco2?" +
+                                "device=" + deviceName.Text() +
+                                "&sensor=CELCIUS"
+                );
+                web_CELCIUS.Get();
+                return true;
+            }
+        }
+        return false;
+    }
+    void handleWebResponse(String status, String textOfResponse) {
+        dbg(("<br><b>" + "some message here" + ":</b> " + textOfResponse + "<br>"));
+
+        if (status.equals("200")) try {
+            JSONObject parser = new JSONObject(textOfResponse);
+            if (parser.getString("Status").equals("OK")) {
+                TemperatureReading.Text(
+                        parser.getString("value")
+                );
+                rolex.TimerEnabled(true);
+            }
+        }
+        catch(JSONException e){
+
+        }
+    }
+    public static void dbg (String debugMsg) {
+        System.err.print( "~~~> " + debugMsg + " <~~~\n");
     }
 }
 // Here be monsters:
