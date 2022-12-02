@@ -51,17 +51,20 @@ public class MainActivity extends Form implements HandlesEventDispatching {
 
         deviceLabel=new Label(Main_h1);
         deviceLabel.Text("Device:");
-        deviceLabel.TextAlignment(ALIGNMENT_CENTER);
+        deviceLabel.TextAlignment(Component.ALIGNMENT_NORMAL);
         deviceLabel.TextColor(COLOR_BLACK);
+        deviceLabel.FontSize(25);
         deviceLabel.HeightPercent(10);
-        deviceLabel.WidthPercent(100);
+        deviceLabel.WidthPercent(40);
         deviceLabel.FontTypeface(TYPEFACE_SERIF);
+
         deviceName=new TextBox(Main_h1);
+        deviceName.TextAlignment(ALIGNMENT_CENTER);
         deviceName.Hint("TCFE-CO2-20-AE");
         deviceName.Text("TCFE-CO2-20-AE");
-        deviceName.FontSize(30);
+        deviceName.FontSize(25);
         deviceName.HeightPercent(10);
-        deviceName.WidthPercent(100);
+        deviceName.WidthPercent(60);
         deviceName.FontTypeface(TYPEFACE_SERIF);
 
         CO2 = new Label(Main);
