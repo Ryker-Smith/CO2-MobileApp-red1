@@ -48,11 +48,22 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CO2Monitor.FontBold(true);
 
         Main_h1=new HorizontalArrangement(Main);
+
         deviceLabel=new Label(Main_h1);
         deviceLabel.Text("Device:");
+        deviceLabel.TextAlignment(ALIGNMENT_CENTER);
+        deviceLabel.TextColor(COLOR_BLACK);
+        deviceLabel.HeightPercent(10);
+        deviceLabel.WidthPercent(100);
+        deviceLabel.FontTypeface(TYPEFACE_SERIF);
         deviceName=new TextBox(Main_h1);
         deviceName.Hint("TCFE-CO2-20-AE");
         deviceName.Text("TCFE-CO2-20-AE");
+        deviceName.FontSize(30);
+        deviceName.HeightPercent(10);
+        deviceName.WidthPercent(100);
+        deviceName.FontTypeface(TYPEFACE_SERIF);
+
         CO2 = new Label(Main);
         CO2.Text("CO2 (parts per million-ppm):");
         CO2.TextColor(COLOR_BLACK);
