@@ -142,7 +142,8 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                 String textOfResponse = (String) params[3];
                 handleWebResponse(status, textOfResponse);
                 return true;
-            } else if (component.equals(web_CO2)) {
+            }
+            else if (component.equals(web_CO2)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
                 handleWebResponse(status, textOfResponse);
@@ -152,32 +153,24 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         else if (eventName.equals("Timer")) {
             if (component.equals(rolex)) {
                 rolex.TimerEnabled(false);
-
                 web_CELCIUS.Url(
                         "https://fachtnaroe.net/qndco2?" +
                                 "device=" + deviceName.Text() +
                                 "&sensor=CELCIUS"
                 );
                 web_CELCIUS.Get();
+                web_CO2.Url(
+                        "https://fachtnaroe.net/qndco2?" +
+                                "device=" + deviceName.Text() +
+                                "&sensor=CO2"
+                );
+                web_CO2.Get();
                 return true;
             }
         }
         return false;
     }
-        else if (eventName.equals("Timer")) {
-        if (component.equals(rolex)) {
-            rolex.TimerEnabled(false);
 
-            web_CELCIUS.Url(
-                    "https://fachtnaroe.net/qndco2?" +
-                            "device=" + deviceName.Text() +
-                            "&sensor=CO2"
-            );
-            web_CO2.Get();
-            return true;
-        }
-    }
-        return false;
     void handleWebResponse(String status, String textOfResponse) {
         dbg(("<br><b>" + "some message here" + ":</b> " + textOfResponse + "<br>"));
 
