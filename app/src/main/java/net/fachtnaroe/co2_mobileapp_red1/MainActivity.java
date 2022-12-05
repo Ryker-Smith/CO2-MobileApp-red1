@@ -178,7 +178,6 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         }
     }
         return false;
-}
     void handleWebResponse(String status, String textOfResponse) {
         dbg(("<br><b>" + "some message here" + ":</b> " + textOfResponse + "<br>"));
 
@@ -201,4 +200,4 @@ public class MainActivity extends Form implements HandlesEventDispatching {
 }
 // Here be monsters:
 // put unwanted code here, or experimental code awaiting placement
-https://fachtnaroe.net/qndco2device=&sensor=CELCIUS
+// https://fachtnaroe.net/qndco2device=&sensor=CELCIUS
