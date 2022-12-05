@@ -22,7 +22,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading, deviceLabel;
     Button PreviousCO2;
     TextBox deviceName;
-    Web web_CELCIUS;
+    Web web_CELCIUS, web_CO2;
     Clock rolex;
 
     protected void $define() {
@@ -48,11 +48,25 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CO2Monitor.FontBold(true);
 
         Main_h1=new HorizontalArrangement(Main);
+
         deviceLabel=new Label(Main_h1);
         deviceLabel.Text("Device:");
+        deviceLabel.TextAlignment(Component.ALIGNMENT_NORMAL);
+        deviceLabel.TextColor(COLOR_BLACK);
+        deviceLabel.FontSize(25);
+        deviceLabel.HeightPercent(10);
+        deviceLabel.WidthPercent(40);
+        deviceLabel.FontTypeface(TYPEFACE_SERIF);
+
         deviceName=new TextBox(Main_h1);
+        deviceName.TextAlignment(ALIGNMENT_CENTER);
         deviceName.Hint("TCFE-CO2-20-AE");
         deviceName.Text("TCFE-CO2-20-AE");
+        deviceName.FontSize(25);
+        deviceName.HeightPercent(10);
+        deviceName.WidthPercent(60);
+        deviceName.FontTypeface(TYPEFACE_SERIF);
+
         CO2 = new Label(Main);
         CO2.Text("CO2 (parts per million-ppm):");
         CO2.TextColor(COLOR_BLACK);
@@ -128,6 +142,11 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                 String textOfResponse = (String) params[3];
                 handleWebResponse(status, textOfResponse);
                 return true;
+            } else if (component.equals(web_CO2)) {
+                String status = params[1].toString();
+                String textOfResponse = (String) params[3];
+                handleWebResponse(status, textOfResponse);
+                return true;
             }
         }
         else if (eventName.equals("Timer")) {
@@ -145,6 +164,20 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         }
         return false;
     }
+        else if (eventName.equals("Timer")) {
+        if (component.equals(rolex)) {
+            rolex.TimerEnabled(false);
+
+            web_CELCIUS.Url(
+                    "https://fachtnaroe.net/qndco2?" +
+                            "device=" + deviceName.Text() +
+                            "&sensor=CO2"
+            );
+            web_CO2.Get();
+            return true;
+        }
+    }
+        return false;
     void handleWebResponse(String status, String textOfResponse) {
         dbg(("<br><b>" + "some message here" + ":</b> " + textOfResponse + "<br>"));
 
@@ -167,3 +200,4 @@ public class MainActivity extends Form implements HandlesEventDispatching {
 }
 // Here be monsters:
 // put unwanted code here, or experimental code awaiting placement
+// https://fachtnaroe.net/qndco2device=&sensor=CELCIUS
