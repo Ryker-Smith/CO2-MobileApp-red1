@@ -77,7 +77,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CO2.FontTypeface(TYPEFACE_SERIF);
 
         CO2Reading = new Label(Main);
-        CO2Reading.Text("334");
+        CO2Reading.Text("0000");
         CO2Reading.TextColor(COLOR_BLACK);
         CO2Reading.TextAlignment(ALIGNMENT_CENTER);
         CO2Reading.HeightPercent(10);
@@ -98,7 +98,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         TemperatureReading = new Label(Main);
         TemperatureReading.HeightPercent(10);
         TemperatureReading.WidthPercent(100);
-        TemperatureReading.Text("17");
+        TemperatureReading.Text("0000");
         TemperatureReading.TextAlignment(ALIGNMENT_CENTER);
         TemperatureReading.TextColor(COLOR_BLACK);
         TemperatureReading.FontSize(30);
