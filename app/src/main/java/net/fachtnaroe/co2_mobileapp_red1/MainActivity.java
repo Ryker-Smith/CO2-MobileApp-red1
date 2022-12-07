@@ -131,26 +131,22 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         if (eventName.equals("BackPressed")) {
             // this would be a great place to do something useful
             return true;
-        }
-        else if (eventName.equals("Click")) {
+        } else if (eventName.equals("Click")) {
 
-        }
-        else if (eventName.equals("GotText")) {
+        } else if (eventName.equals("GotText")) {
             dbg("GotText");
             if (component.equals(web_CELCIUS)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
                 handleWebResponse(status, textOfResponse);
                 return true;
-            }
-            else if (component.equals(web_CO2)) {
+            } else if (component.equals(web_CO2)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
                 handleWebResponse(status, textOfResponse);
                 return true;
             }
-        }
-        else if (eventName.equals("Timer")) {
+        } else if (eventName.equals("Timer")) {
             if (component.equals(rolex)) {
                 rolex.TimerEnabled(false);
                 web_CELCIUS.Url(
@@ -169,7 +165,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
             }
         }
         return false;
-    }
+
             System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
         if (eventName.equals("BackPressed")) {
         // this would be a great place to do something useful
