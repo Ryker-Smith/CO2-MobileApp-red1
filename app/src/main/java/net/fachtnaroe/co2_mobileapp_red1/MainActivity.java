@@ -77,7 +77,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         CO2.FontTypeface(TYPEFACE_SERIF);
 
         CO2Reading = new Label(Main);
-        CO2Reading.Text("0000");
+        CO2Reading.Text(" ");
         CO2Reading.TextColor(COLOR_BLACK);
         CO2Reading.TextAlignment(ALIGNMENT_CENTER);
         CO2Reading.HeightPercent(10);
@@ -98,7 +98,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         TemperatureReading = new Label(Main);
         TemperatureReading.HeightPercent(10);
         TemperatureReading.WidthPercent(100);
-        TemperatureReading.Text("0000");
+        TemperatureReading.Text(" ");
         TemperatureReading.TextAlignment(ALIGNMENT_CENTER);
         TemperatureReading.TextColor(COLOR_BLACK);
         TemperatureReading.FontSize(30);
@@ -155,49 +155,13 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                                 "&sensor=CELCIUS"
                 );
                 web_CELCIUS.Get();
-                web_CO2.Url(
-                        "https://fachtnaroe.net/qndco2?" +
-                                "device=" + deviceName.Text() +
-                                "&sensor=CO2"
-                );
-                web_CO2.Get();
                 return true;
             }
         }
         return false;
+    }
 
-        System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
-        if (eventName.equals("BackPressed")) {
-        // this would be a great place to do something useful
-        return true;
-    }
-        else if (eventName.equals("Click")) {
-        if (component.equals(PreviousCO2)) {
-            web_CO2.Url("https://fachtnaroe.net/qndco2?");
-            CO2Reading.Text(web_CO2.Url());
-            dbg("Sending request");
-            System.err.print("You pressed the button");
-            web_CO2.Get();
-            dbg("Request sent");
-            return true;
-        }
-    }
-        else if (eventName.equals("GotText")) {
-        dbg("GotText");
-        if (component.equals(web_CO2)) {
-//                dbg("My web component");
-            CO2Reading.Text("Formatting\n");
 
-            String status = params[1].toString();
-            String textOfResponse = (String) params[3];
-//                dbg("Calling function to process response");
-            handleWebResponse(status, textOfResponse);
-//                dbg("Finished and returned");
-            return true;
-        }
-    }
-        return false;
-}
 
     void handleWebResponse(String status, String textOfResponse) {
         dbg(("<br><b>" + "some message here" + ":</b> " + textOfResponse + "<br>"));
