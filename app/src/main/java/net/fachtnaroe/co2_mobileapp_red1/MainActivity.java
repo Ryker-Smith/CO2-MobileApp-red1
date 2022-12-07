@@ -115,6 +115,7 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         PreviousCO2.BackgroundColor(COLOR_GRAY);
         PreviousCO2.FontTypeface(TYPEFACE_SERIF);
         rolex = new Clock(Main);
+        web_CO2 = new Web(Main);
         web_CELCIUS =new Web(Main);
         rolex.TimerInterval(10000);
         rolex.TimerEnabled(true);
@@ -138,23 +139,22 @@ public class MainActivity extends Form implements HandlesEventDispatching {
             if (component.equals(web_CELCIUS)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
-                handleWebResponse(status, textOfResponse);
+                handleWebResponse(component, status, textOfResponse);
                 return true;
             } else if (component.equals(web_CO2)) {
                 String status = params[1].toString();
                 String textOfResponse = (String) params[3];
-                handleWebResponse(status, textOfResponse);
+                handleWebResponse(component, status, textOfResponse);
                 return true;
             }
-        } else if (eventName.equals("Timer")) {
+        }
+        else if (eventName.equals("Timer")) {
             if (component.equals(rolex)) {
                 rolex.TimerEnabled(false);
-                web_CELCIUS.Url(
-                        "https://fachtnaroe.net/qndco2?" +
-                                "device=" + deviceName.Text() +
-                                "&sensor=CELCIUS"
-                );
+                web_CELCIUS.Url("https://fachtnaroe.net/qndco2?" + "device=" + deviceName.Text() + "&sensor=CELCIUS");
                 web_CELCIUS.Get();
+                web_CO2.Url("https://fachtnaroe.net/qndco2?" + "device=" + deviceName.Text() + "&sensor=CO2");
+                web_CO2.Get();
                 return true;
             }
         }
@@ -163,16 +163,18 @@ public class MainActivity extends Form implements HandlesEventDispatching {
 
 
 
-    void handleWebResponse(String status, String textOfResponse) {
+    void handleWebResponse(Component c ,String status, String textOfResponse ) {
         dbg(("<br><b>" + "some message here" + ":</b> " + textOfResponse + "<br>"));
 
         if (status.equals("200")) try {
             JSONObject parser = new JSONObject(textOfResponse);
             if (parser.getString("Status").equals("OK")) {
-                TemperatureReading.Text(
-                        parser.getString("value")
-                );
-                rolex.TimerEnabled(true);
+                if (c.equals(web_CELCIUS)) {
+                    TemperatureReading.Text(parser.getString("value"));
+                    rolex.TimerEnabled(true);
+                } else if (c.equals(web_CO2)) {
+                    CO2Reading.Text(parser.getString("value"));
+                }
             }
         }
         catch(JSONException e){
