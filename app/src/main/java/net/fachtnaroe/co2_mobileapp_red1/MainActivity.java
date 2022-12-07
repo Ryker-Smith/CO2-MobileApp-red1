@@ -166,28 +166,27 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         }
         return false;
 
-            System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
+        System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
         if (eventName.equals("BackPressed")) {
         // this would be a great place to do something useful
         return true;
     }
         else if (eventName.equals("Click")) {
-        if (component.equals(goButton)) {
-            contentGetter.Url( servernameBox.Text() + commandBox.Text() );
-            contentBox.Text(contentGetter.Url());
+        if (component.equals(PreviousCO2)) {
+            web_CO2.Url("https://fachtnaroe.net/qndco2?");
+            CO2Reading.Text(web_CO2.Url());
             dbg("Sending request");
-            goButton.Text("working");
             System.err.print("You pressed the button");
-            contentGetter.Get();
+            web_CO2.Get();
             dbg("Request sent");
             return true;
         }
     }
         else if (eventName.equals("GotText")) {
         dbg("GotText");
-        if (component.equals(contentGetter)) {
+        if (component.equals(web_CO2)) {
 //                dbg("My web component");
-            contentBox.Text("Formatting\n");
+            CO2Reading.Text("Formatting\n");
 
             String status = params[1].toString();
             String textOfResponse = (String) params[3];
