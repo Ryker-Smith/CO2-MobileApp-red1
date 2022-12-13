@@ -20,7 +20,6 @@ public class MainActivity extends Form implements HandlesEventDispatching {
     VerticalArrangement Main;
     HorizontalArrangement Main_h1;
     Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading, deviceLabel;
-    Button PreviousCO2;
     TextBox deviceName;
     Web web_CELCIUS, web_CO2;
     Clock rolex;
@@ -105,15 +104,6 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         TemperatureReading.BackgroundColor(COLOR_WHITE);
         TemperatureReading.FontTypeface(TYPEFACE_SERIF);
 
-        PreviousCO2 = new Button(Main);
-        PreviousCO2.Text("Previous CO2 Readings");
-        PreviousCO2.TextColor(COLOR_BLACK);
-        PreviousCO2.TextAlignment(ALIGNMENT_CENTER);
-        PreviousCO2.HeightPercent(10);
-        PreviousCO2.WidthPercent(100);
-        PreviousCO2.FontSize(25);
-        PreviousCO2.BackgroundColor(COLOR_GRAY);
-        PreviousCO2.FontTypeface(TYPEFACE_SERIF);
         rolex = new Clock(Main);
         web_CO2 = new Web(Main);
         web_CELCIUS =new Web(Main);
